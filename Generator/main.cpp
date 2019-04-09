@@ -9,7 +9,7 @@
 using namespace std;
 
 const std::pair<double,double> radius = {15, 30};
-const int max_dim_size = 1000;
+const int max_dim_size = 200;
 
 class Generator {
 public:
@@ -141,8 +141,10 @@ private:
         std::vector<double> pos_vert(number_of_dimensions);
         for(int i =0; i< number_of_elements[v]; ++i) {
             pos_vert = get_random_direction();
-            for(int i = 0; i < number_of_dimensions; ++i)
+            for(int i = 0; i < number_of_dimensions; ++i) {
                 pos_vert[i] = pos_vert[i] * (rand() % (int)(radius.first + rand() % (int)(radius.second - radius.first))) + pos[i];
+                pos_vert[i] /= max_dim_size;
+            }
 
             data[v].push_back(pos_vert);
         }
